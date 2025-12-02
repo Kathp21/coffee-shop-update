@@ -26,6 +26,8 @@
   --color-text-dark: #1a1a1a;
   --color-favorites: #A8C3B3;
   --color-button-primary: #2A4033;
+  --color-primary: #7d9b76;
+  --color-text-primary: #1a1511;
   
   /* Custom Animations */
   --animate-fade-in: fade-in 0.3s ease-in-out;
