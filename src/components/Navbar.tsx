@@ -32,7 +32,7 @@ export const Navbar:React.FC = () => {
                     ))}
                 
                     {/* Desktop cart icon */}
-                    <Link to='/cart' className='relative p-2 text-text-dark hiver:text-text-light focus:outline-none transition-colors' aria-label='Shopping cart'>
+                    <Link to='/cart' className='relative p-2 text-text-dark hover:text-text-light focus:outline-none transition-colors' aria-label='Shopping cart'>
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
@@ -95,7 +95,7 @@ export const Navbar:React.FC = () => {
                         <Link
                             to='/menu'
                             onClick={() => setIsMenuOpen(false)}
-                            className='w-40 bg-primary hover-bg-button-primary/90 text-text-primary font-semibold py-3 px-6 rounded-full text-base transition-all duration-200 block text-center'
+                            className='w-40 bg-primary hover:bg-button-primary/90 text-text-primary font-semibold py-3 px-6 rounded-full text-base transition-all duration-200 block text-center'
                         >
                             Order Now
                         </Link>
