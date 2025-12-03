@@ -1,8 +1,18 @@
 import hero from '../assets/images/hero-image.png'
 import { Link } from 'react-router-dom'
+import { SliceCards } from '../components/SliceCards'
+import signature1 from '../assets/images/signatureBlend1.png'
+import signature2 from '../assets/images/signatureBlend2.png'
+import signature3 from '../assets/images/signatureBlend3.png'
 
 
 export const HomePage = () => {
+    const signatureBlends = [
+        {name: "The Classic", summary: "Our signature blend, perfect for everyday enjoyment.", image: signature1},
+        {name: "The Bold", summary: "A rich and intense blend for the adventurous palate.", image: signature2},
+        {name: "The Coy Corner", summary: "Our cozy corner blend, perfect for a relaxing afternoon.", image: signature3},
+    ]
+
 
     return(
         <>
@@ -29,12 +39,16 @@ export const HomePage = () => {
                             <span className='truncate'>View Menu</span>
                         </Link>
                     </div>
-
-
                 </div>
-
-
             </section>
+
+            {/* Our Signature */}
+            <SliceCards
+                sectionName='Our Signature Blends'
+                details={signatureBlends}
+            />
+
+
         </>
     )
 }
