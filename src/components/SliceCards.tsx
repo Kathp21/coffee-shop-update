@@ -9,9 +9,15 @@ interface CardInfo {
 interface SectionProps{
     sectionName: string;
     details: CardInfo[];
+    customClass?: string;
+    itemsPerViewConfig? : {
+        mobile?: number;
+        tablet?: number;
+        desktop?: number;
+    }
 }
 
-export const SliceCards = ({ sectionName, details }: SectionProps) => {
+export const SliceCards = ({ sectionName, details, customClass, itemsPerViewConfig }: SectionProps) => {
 
     const [ currentSlide, setCurrentSlide ] = useState(0)
     const [ itemsPerView, setItemsPerView ] = useState(1)
@@ -21,13 +27,13 @@ export const SliceCards = ({ sectionName, details }: SectionProps) => {
     // Calculate items per view based on screen size
     useEffect(() => {
         const updateItemsPerView = () => {
-            let newItemsPerView = 1
+            let newItemsPerView = itemsPerViewConfig?.mobile ?? 1
             if(window.innerWidth >=1024) {
-                newItemsPerView = 4
+                newItemsPerView = itemsPerViewConfig?.desktop ?? 4
             } else if (window.innerWidth >=768) {
-                newItemsPerView = 3
+                newItemsPerView = itemsPerViewConfig?.tablet ?? 3
             } else {
-                newItemsPerView = 1
+                newItemsPerView = itemsPerViewConfig?.mobile ?? 1
             }
 
             setItemsPerView(newItemsPerView)
@@ -88,9 +94,9 @@ export const SliceCards = ({ sectionName, details }: SectionProps) => {
     const translateX = -(currentSlide * (100 / itemsPerView))
 
     return(
-        <section className="">
+        <section className="p-4">
             <div className="max-w-7xl mx-auto">
-                <h3 className='text-xl md:text-4xl text-text-dark font-bold mb-6 md:mb-8'>{sectionName}</h3>
+                <h3 className='text-xl md:text-4xl text-text-dark font-bold px-4 mb-6 md:mb-8'>{sectionName}</h3>
             
             <div className="relative mb-10 md:mb-12">
                 {/* Carousel container */}
@@ -102,9 +108,9 @@ export const SliceCards = ({ sectionName, details }: SectionProps) => {
                         style={{transform:`translateX(${translateX}%)`}}
                     >
                         {details.map((detail, index) => (
-                            <div key={index} className="w-full h-full shrink-0 md:w-1/3 lg:w-1/4 px-4">
-                                <img src={detail.image} alt={detail.name} className="w-full h-auto" ref={index === 0 ? imageRef : null} />
-                                <div className="p-4">
+                            <div key={index} className={`w-full h-full shrink-0 md:w-1/3 px-4 ${customClass}`}>
+                                <img src={detail.image} alt={detail.name} className="w-full h-auto rounded-md" ref={index === 0 ? imageRef : null} />
+                                <div className="p-4 md:px-0">
                                     <h4 className="text-lg md:text-xl text-text-dark font-bold mb-2">{detail.name}</h4>
                                     <p className="text-sm md:text-base text-text-dark font-light">{detail.summary}</p> 
                                 </div>

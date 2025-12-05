@@ -4,6 +4,10 @@ import { SliceCards } from '../components/SliceCards'
 import signature1 from '../assets/images/signatureBlend1.png'
 import signature2 from '../assets/images/signatureBlend2.png'
 import signature3 from '../assets/images/signatureBlend3.png'
+import item1 from '../assets/images/espresso.png'
+import item2 from '../assets/images/latte.png'
+import item3 from '../assets/images/ice-coffee.png'
+import item4 from '../assets/images/ceremorial-matcha.png'
 
 
 export const HomePage = () => {
@@ -13,6 +17,12 @@ export const HomePage = () => {
         {name: "The Coy Corner", summary: "Our cozy corner blend, perfect for a relaxing afternoon.", image: signature3},
     ]
 
+    const featuredItems = [
+        {name: "Espresso", summary: "A concentrated shot of our signature blend.", image: item1},
+        {name: "Latte", summary: "Expresso with steamed milk and a thin layer of foam.", image: item2},
+        {name: "Iced Coffee", summary: "Refreshing coffee served over ice.", image: item3},
+        {name: "Ceremorial Matcha", summary: "Smooth Japanese matcha whisked to perfection.", image: item4},
+    ]
 
     return(
         <>
@@ -48,7 +58,17 @@ export const HomePage = () => {
                 details={signatureBlends}
             />
 
-
+            {/* Featured Items  */}
+            <SliceCards
+                sectionName='Featured Items'
+                details={featuredItems}
+                customClass='md:w-1/4'
+                itemsPerViewConfig={{
+                    mobile: 1,
+                    tablet: 4,
+                    desktop: 4
+                }}
+            />
         </>
     )
 }
