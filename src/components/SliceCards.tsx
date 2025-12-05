@@ -98,80 +98,80 @@ export const SliceCards = ({ sectionName, details, customClass, itemsPerViewConf
             <div className="max-w-7xl mx-auto">
                 <h3 className='text-xl md:text-4xl text-text-dark font-bold px-4 mb-6 md:mb-8'>{sectionName}</h3>
             
-            <div className="relative mb-10 md:mb-12">
-                {/* Carousel container */}
-                <div className="relative overflow-hidden">
+                <div className="relative mb-10 md:mb-12">
+                    {/* Carousel container */}
+                    <div className="relative overflow-hidden">
 
-                    {/* Carousel slides */}
-                    <div 
-                        className="flex transition-transform duration-300"
-                        style={{transform:`translateX(${translateX}%)`}}
-                    >
-                        {details.map((detail, index) => (
-                            <div key={index} className={`w-full h-full shrink-0 md:w-1/3 px-4 ${customClass}`}>
-                                <img src={detail.image} alt={detail.name} className="w-full h-auto rounded-md" ref={index === 0 ? imageRef : null} />
-                                <div className="p-4 md:px-0">
-                                    <h4 className="text-lg md:text-xl text-text-dark font-bold mb-2">{detail.name}</h4>
-                                    <p className="text-sm md:text-base text-text-dark font-light">{detail.summary}</p> 
+                        {/* Carousel slides */}
+                        <div 
+                            className="flex transition-transform duration-300"
+                            style={{transform:`translateX(${translateX}%)`}}
+                        >
+                            {details.map((detail, index) => (
+                                <div key={index} className={`w-full h-full shrink-0 md:w-1/3 px-4 ${customClass}`}>
+                                    <img src={detail.image} alt={detail.name} className="w-full h-auto rounded-md" ref={index === 0 ? imageRef : null} />
+                                    <div className="p-4 md:px-0">
+                                        <h4 className="text-lg md:text-xl text-text-dark font-bold mb-2">{detail.name}</h4>
+                                        <p className="text-sm md:text-base text-text-dark font-light">{detail.summary}</p> 
+                                    </div>
+                                
                                 </div>
-                            
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+
+                        {/* Navigation buttons */}
+                        {details.length > itemsPerView && (
+                            <>
+                                {/* previous slide button */}
+                                <button
+                                    onClick={prevSlide}
+                                    className="absolute left-2 md:left-4 bg-white/90 hover:bg-white text-text-dark p-2 md:p-3 rounded-full shadow-lg transition-all duration-200 z-20"
+                                    style={{ 
+                                        top: imageHeight > 0 ? `${imageHeight / 2}px` : '50%',
+                                        transform: 'translateY(-50%)'
+                                    }}
+                                    aria-label="Previous slide"
+                                >
+                                    <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+
+                                {/* Next slide button */}
+                                <button
+                                    onClick={nextSlide}
+                                    className="absolute right-2 md:right-4 bg-white/90 hover:bg-white text-text-dark p-2 md:p-3 rounded-full shadow-lg transition-all duration-200 z-20"
+                                    style={{ 
+                                        top: imageHeight > 0 ? `${imageHeight / 2}px` : '50%',
+                                        transform: 'translateY(-50%)'
+                                    }}
+                                    aria-label="Next slide"
+                                >
+                                    <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+
+                            </>
+                        )}
+                        
                     </div>
 
-                    {/* Navigation buttons */}
+                    {/* Slide indicators */}
                     {details.length > itemsPerView && (
-                        <>
-                            {/* previous slide button */}
-                            <button
-                                onClick={prevSlide}
-                                className="absolute left-2 md:left-4 bg-white/90 hover:bg-white text-text-dark p-2 md:p-3 rounded-full shadow-lg transition-all duration-200 z-20"
-                                style={{ 
-                                    top: imageHeight > 0 ? `${imageHeight / 2}px` : '50%',
-                                    transform: 'translateY(-50%)'
-                                }}
-                                aria-label="Previous slide"
-                            >
-                                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-
-                            {/* Next slide button */}
-                            <button
-                                onClick={nextSlide}
-                                className="absolute right-2 md:right-4 bg-white/90 hover:bg-white text-text-dark p-2 md:p-3 rounded-full shadow-lg transition-all duration-200 z-20"
-                                style={{ 
-                                    top: imageHeight > 0 ? `${imageHeight / 2}px` : '50%',
-                                    transform: 'translateY(-50%)'
-                                }}
-                                aria-label="Next slide"
-                            >
-                                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-
-                        </>
+                        <div className="flex justify-center gap-2 mt-6">
+                            {Array.from({length: maxSlide + 1}).map((_, index) => {
+                                return <button
+                                    key={index}
+                                    onClick={() => setCurrentSlide(index)}
+                                    className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-primary w-8' : 'bg-gray-300 w-2 hover:bg-gray-400'} `}
+                                    aria-label={`Go to slide ${index + 1}`}                     
+                                />
+                            })}
+                        </div>
                     )}
-                    
                 </div>
-
-                {/* Slide indicators */}
-                {details.length > itemsPerView && (
-                    <div className="flex justify-center gap-2 mt-6">
-                        {Array.from({length: maxSlide + 1}).map((_, index) => {
-                            return <button
-                                key={index}
-                                onClick={() => setCurrentSlide(index)}
-                                className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-primary w-8' : 'bg-gray-300 w-2 hover:bg-gray-400'} `}
-                                aria-label={`Go to slide ${index + 1}`}                     
-                            />
-                        })}
-                    </div>
-                )}
             </div>
-        </div>
         </section>
     )
 }

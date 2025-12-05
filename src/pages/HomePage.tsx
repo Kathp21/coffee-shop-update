@@ -8,6 +8,8 @@ import item1 from '../assets/images/espresso.png'
 import item2 from '../assets/images/latte.png'
 import item3 from '../assets/images/ice-coffee.png'
 import item4 from '../assets/images/ceremorial-matcha.png'
+import { MapPin, Clock3, Phone, Mail } from 'lucide-react'
+import { ShopInfo } from '../components/ShopInfo'
 
 
 export const HomePage = () => {
@@ -22,6 +24,13 @@ export const HomePage = () => {
         {name: "Latte", summary: "Expresso with steamed milk and a thin layer of foam.", image: item2},
         {name: "Iced Coffee", summary: "Refreshing coffee served over ice.", image: item3},
         {name: "Ceremorial Matcha", summary: "Smooth Japanese matcha whisked to perfection.", image: item4},
+    ]
+
+    const shopInfo = [
+        {title: 'Location', information: "123 Brew Street, Vancouver V5P 1T9", icon: MapPin},
+        {title: 'Hours', information: "Monday-Friday: 7am-8pm\nSaturday-Sunday: 8am-9pm", icon: Clock3},
+        {title: 'Phone', information: "+1 (778) 797-6964", icon: Phone},
+        {title: 'Email', information: "hello@coffeeshop.com", icon: Mail},
     ]
 
     return(
@@ -69,6 +78,19 @@ export const HomePage = () => {
                     desktop: 4
                 }}
             />
+
+            <ShopInfo
+                details={shopInfo}
+            />
+
+            <section className='mt-8 md:mt-12'>
+                <div className="w-full h-[300px] md:h-[400px] bg-gray-800 rounded-lg overflow-hidden border border-gray-700 flex flex-col items-center justify-center space-y-4">
+                    <div className='text-center'> 
+                        <MapPin size={50} color='#F5F5DC'/>
+                    </div>
+                    <p className='text-text-light/60 text-sm md:text-base'>Map placeholder</p>
+                </div>
+            </section>
         </>
     )
 }
